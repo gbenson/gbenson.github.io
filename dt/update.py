@@ -68,7 +68,13 @@ for i, token in enumerate(TOKENS):
     basename, imagedata = get_badge(token, color)
     basename, dirname = basename.split("-")
     dirname = dirname.lower()
-    basename = basename.replace("%", "").replace("...", "dotdotdot")
+    match basename:
+        case "...":
+            basename = "dotdotdot"
+        case "__":
+            basename = "5F"
+        case _:
+            basename = basename.replace("%", "")
     os.makedirs(dirname, exist_ok=True)
     filename = f"{dirname}/{basename}.svg"
     with open(filename, "w") as fp:
