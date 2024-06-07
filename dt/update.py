@@ -43,7 +43,7 @@ TOKENS = [
     "_", "http", "equiv",
     "=", "content", "type",
     "_", "content",
-    "=", "text", "html", "charset", "utf", "8", ">",
+    "=", "text", "html", "charset", "UTF", "8", ">",
 
     "<", "meta",
     "_", "name",
@@ -68,8 +68,7 @@ for i, token in enumerate(TOKENS):
     basename, imagedata = get_badge(token, color)
     basename, dirname = basename.split("-")
     dirname = dirname.lower()
-    if basename == "...":
-        basename = "dotdotdot"
+    basename = basename.replace("%", "").replace("...", "dotdotdot")
     os.makedirs(dirname, exist_ok=True)
     filename = f"{dirname}/{basename}.svg"
     with open(filename, "w") as fp:
